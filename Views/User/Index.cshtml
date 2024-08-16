@@ -1,0 +1,30 @@
+@{
+    var userRoles = ViewBag.UserRoles as List<UserRoleViewModel>;
+}
+
+<table>
+    <thead>
+        <tr>
+            <th>User</th>
+            <th>Roles</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var userRole in userRoles)
+        {
+            <tr>
+                <td>@userRole.User.UserName</td>
+                <td>
+                    @if (userRole.Roles.Any())
+                    {
+                        @string.Join(", ", userRole.Roles)
+                    }
+                    else
+                    {
+                        <em>Rol Eklenmemiş</em>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
