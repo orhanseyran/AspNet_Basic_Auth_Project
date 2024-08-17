@@ -52,6 +52,8 @@ namespace auth.Controllers
 
         public IActionResult Create()
         {
+            var role =  _roleManager.Roles.ToList();
+            ViewBag.Role = role;
             return View();
         }
 
@@ -73,7 +75,13 @@ namespace auth.Controllers
 
             var result = await _userManager.CreateAsync(usercreate, addUser.Password);
 
-            var role  =  await _userManager.AddToRoleAsync(usercreate, "Admin");
+            if (addUser.Role == null)
+            {
+                return View(addUser);
+                
+            }
+
+            var role  =  await _userManager.AddToRoleAsync(usercreate, addUser.Role);
 
             if (result.Succeeded)
             {

@@ -1,8 +1,12 @@
 @{
     ViewData["Title"] = "Create";
+
+
 }
 
+
 @model AddUser
+
 
 <form asp-action="Create">
     <div class="mb-3">
@@ -30,5 +34,21 @@
     <input type="checkbox" class="form-check-input" id="exampleCheck1">
     <label class="form-check-label" for="exampleCheck1">Check me out</label>
   </div>
+  <div class="mb-3">
+    <label for="" class="form-label">Role Seç</label>
+    <select
+      class="form-select form-select-lg"
+      asp-for="Role"
+      id=""
+    >
+     @foreach (var role in @ViewBag.Role)
+            {
+      <option value="@role.Name" >@role.Name</option>
+
+        }
+    </select>
+  
+  </div>
+  
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
