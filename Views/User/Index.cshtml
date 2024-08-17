@@ -1,31 +1,50 @@
 @{
     var userRoles = ViewBag.UserRoles as List<UserRoleViewModel>;
 }
-
-<table>
-    <thead>
-        <tr>
-            <th>User</th>
-            <th>Roles</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var userRole in userRoles)
-        {
+<div
+    class="table-responsive"
+>
+    <table
+        class="table table-striped table-hover table-borderless table-primary align-middle"
+    >
+        <thead class="table-light">
+            <caption>
+                Kullanıcı Listesi
+            </caption>
             <tr>
-                <td>@userRole.User.UserName</td>
-                <td>
-                    @if (userRole.Roles.Any())
-                    {
-                        @string.Join(", ", userRole.Roles)
-                    }
-                    else
-                    {
-                        <em>Rol Eklenmemiş</em>
-                    }
-                </td>
+             <th>User</th>
+            <th>Rolü</th>
+            <th>Düzenle - Sil </th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody class="table-group-divider">
+                @foreach (var userRole in userRoles)
+                {
+                    <tr>
+                        <td>@userRole.User.UserName</td>
+                        <td>
+                            @if (userRole.Roles.Any())
+                            {
+                                @string.Join(", ", userRole.Roles)
+                            }
+                            else
+                            {
+                                <em>Rol Eklenmemiş</em>
+                            }
+                        </td>
+                        <td>
+                            <a href="http://localhost:5094/User/Edit/@userRole.User.Id" class="btn btn-primary">Düzenle</a>
+                            <a  class="btn btn-danger">Sil</a>
+                        </td>
+                    </tr>
+                }
+        </tbody>
+        <tfoot>
+            
+        </tfoot>
+    </table>
+</div>
+
+
+
 
