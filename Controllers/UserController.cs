@@ -99,22 +99,28 @@ namespace auth.Controllers
         public async Task<IActionResult> Edit(string id)
         {
             var user = await _userManager.FindByIdAsync(id);
-            ViewBag.User = user;
+
             if (user == null)
             {
                 return NotFound();
             }
-            var role = await _roleManager.FindByIdAsync(user.Id);
-            ViewBag.RoleId = role;
-      
-            var roles =  _roleManager.Roles.ToList();
-            ViewBag.Role = roles;
-            if (roles == null)
+
+            // Kullanıcıya atanmış rolleri al
+            var userRoles = await _userManager.GetRolesAsync(user);
+
+            var roles = _roleManager.Roles.ToList();
+            ViewBag.Roles = roles; // Tüm roller
+            ViewBag.UserRoles = userRoles; // Kullanıcıya atanmış roller
+            ViewBag.User = user;
+
+            if (roles == null || !roles.Any())
             {
                 return NotFound();
             }
+
             return View();
         }
+
         public async Task<IActionResult> EditPost(AddUser addUser, string id)
         {
             var user = await _userManager.FindByIdAsync(id);

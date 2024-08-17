@@ -1,13 +1,15 @@
 @{
     ViewData["Title"] = "Edit";
     var user =  ViewBag.User;
-    var roles = ViewBag.Role;
+    var roles = ViewBag.UserRoles;
+    var role = ViewBag.Roles;
+
 }
 
 @model AddUser
 
 
-<form action="/User/EditPost/@user.Id" method="post">
+<form action="/User/EditPost/@user.Id" method="POST">
     <div class="mb-3">
         <label for="" class="form-label">Name</label>
         <input
@@ -41,12 +43,16 @@
       asp-for="Role"
       id=""
     >
-      <option value="Seçilmemiş" selected > Role Seç</option>
+    @foreach (var role in @ViewBag.UserRoles)
+    {
+       <option value="@role" selected >@role (Seçilen Rol)</option> 
+    }
 
-     @foreach (var role in @ViewBag.Role)
+
+
+     @foreach (var role in @ViewBag.Roles)
             {
-
-      <option value="@role.Name" >@role.Name</option>
+      <option value="@role.Name" >@role.Name </option>
 
         }
     </select>
