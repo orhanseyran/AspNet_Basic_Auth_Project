@@ -11,6 +11,6 @@ namespace auth.Models
         [Required(ErrorMessage = "Ad alanı zorunludur.")]
         [Display(Name = "Role Name")]
        
-        public string ? Name { get; set; } 
+        public string ? NameUser { get; set; } 
     }
 }
